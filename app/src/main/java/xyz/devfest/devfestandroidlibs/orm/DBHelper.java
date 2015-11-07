@@ -17,18 +17,19 @@ import xyz.devfest.devfestandroidlibs.Persona;
  */
 public class DBHelper  extends OrmLiteSqliteOpenHelper {
 
-    private static final String DATABASE_NAME = "devfest_ormlite.db";
+    private static final String DATABASE_NOMBRE = "devfest_ormlite.db";
     private static final int DATABASE_VERSION = 1;
 
     private Dao<Persona, Integer> personaDao;
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NOMBRE, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
         try {
+            //Creamos la tabla
             TableUtils.createTable(connectionSource, Persona.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -41,6 +42,7 @@ public class DBHelper  extends OrmLiteSqliteOpenHelper {
     }
 
     public Dao<Persona, Integer> getPersonaDao() throws SQLException {
+        //Obtenemos el DAO de persona Mas info: https://es.wikipedia.org/wiki/Data_Access_Object
         if (personaDao == null) {
             personaDao = getDao(Persona.class);
         }
@@ -50,6 +52,7 @@ public class DBHelper  extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void close() {
+        //Cerramos la base de datos
         super.close();
         personaDao = null;
     }

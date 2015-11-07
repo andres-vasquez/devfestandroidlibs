@@ -50,6 +50,7 @@ public class ActivityGson extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        //Campos del formulario
         lyResultado=(LinearLayout)findViewById(R.id.lyResultado);
 
         btnSerializar=(Button)findViewById(R.id.btnSerializar);
@@ -61,10 +62,12 @@ public class ActivityGson extends AppCompatActivity {
         txtApellido=(EditText)findViewById(R.id.txtApellido);
         txtEdad=(EditText)findViewById(R.id.txtEdad);
 
+        //Click serializar
         btnSerializar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //Contruimos el objeto person
                 Persona persona=new Persona();
                 persona.setNombre(txtNombre.getText().toString());
                 persona.setApellido(txtApellido.getText().toString());
@@ -75,6 +78,7 @@ public class ActivityGson extends AppCompatActivity {
                     persona.setEdad(0);
                 }
 
+                //Lo convertimos en un String
                 Gson gson=new Gson();
                 strPersona=gson.toJson(persona);
 
@@ -83,10 +87,11 @@ public class ActivityGson extends AppCompatActivity {
                 editor.putString("persona",strPersona);
                 editor.commit();
 
-
+                //Mostramos el String en un TextView resultado
                 txtResultado.setText(strPersona);
                 btnSerializar.setEnabled(false);
 
+                //Limpiamos los campos
                 txtNombre.setText("");
                 txtApellido.setText("");
                 txtEdad.setText("");
@@ -101,9 +106,11 @@ public class ActivityGson extends AppCompatActivity {
 
                 try
                 {
+                    //Obtenemos el objeto desde el String
                     Gson gson=new Gson();
                     Persona persona=gson.fromJson(strPersona,Persona.class);
 
+                    //Mostramos en el formulario
                     txtNombre.setText(persona.getNombre());
                     txtEdad.setText(String.valueOf(persona.getEdad()));
                     txtApellido.setText(persona.getApellido());
@@ -112,6 +119,8 @@ public class ActivityGson extends AppCompatActivity {
                 {
 
                 }
+
+                //Vaciamos el resultado
                 txtResultado.setText("");
                 btnSerializar.setEnabled(true);
                 lyResultado.setVisibility(View.GONE);

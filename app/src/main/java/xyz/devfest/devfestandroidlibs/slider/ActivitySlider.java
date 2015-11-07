@@ -33,6 +33,7 @@ public class ActivitySlider extends AppCompatActivity {
         context=this;
         sliderLayout=(SliderLayout)findViewById(R.id.sliderLayout);
 
+        //Crea un slide
         DefaultSliderView slider=new DefaultSliderView(context);
         slider.image("https://userscontent2.emaze.com/images/8afd9e47-33b2-4a4e-843a-53c4af41a296/c7bff681-2555-4f43-9871-0ab383b0008b.jpg");
 
@@ -44,7 +45,7 @@ public class ActivitySlider extends AppCompatActivity {
         });
         sliderLayout.addSlider(slider);
 
-
+        //Crea otro Slide
         DefaultSliderView slider1=new DefaultSliderView(context);
         slider1.image("http://www.objetoslujosos.com/i/Resort-Cove-Atlantis.jpg");
 
@@ -56,6 +57,7 @@ public class ActivitySlider extends AppCompatActivity {
         });
         sliderLayout.addSlider(slider1);
 
+        //Play a la transicion
         sliderLayout.startAutoCycle();
     }
 

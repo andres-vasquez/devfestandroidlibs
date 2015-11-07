@@ -22,6 +22,8 @@ public class ActivityZxing extends AppCompatActivity implements ZXingScannerView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Layout de visor de QR
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
 
@@ -49,6 +51,7 @@ public class ActivityZxing extends AppCompatActivity implements ZXingScannerView
     @Override
     public void onResume() {
         super.onResume();
+        //Inicia la camara
         mScannerView.setResultHandler(this);
         mScannerView.startCamera();
     }
@@ -56,10 +59,12 @@ public class ActivityZxing extends AppCompatActivity implements ZXingScannerView
     @Override
     public void onPause() {
         super.onPause();
+        //Detiene la camara
         mScannerView.stopCamera();
     }
 
     public void handleResult(Result rawResult) {
+        //Resultado de lectura de QR
         Log.v(TAG, rawResult.getText());
         Log.v(TAG, rawResult.getBarcodeFormat().toString());
 

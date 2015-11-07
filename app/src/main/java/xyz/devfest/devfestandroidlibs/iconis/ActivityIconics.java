@@ -1,6 +1,7 @@
 package xyz.devfest.devfestandroidlibs.iconis;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -49,10 +50,12 @@ public class ActivityIconics extends AppCompatActivity {
          imgCinco=(ImageView)findViewById(R.id.imgCinco);
          imgSeis=(ImageView)findViewById(R.id.imgSeis);
 
-         imgUno.setImageDrawable(new IconicsDrawable(this)
-                 .icon(FontAwesome.Icon.faw_android)
-                 .color(getResources().getColor(R.color.colorAccent))
-                 .sizeDp(24));
+        //Definimos las caracteristicas de la imagen
+        Drawable drawable=new IconicsDrawable(this)
+                .icon(FontAwesome.Icon.faw_android)
+                .color(getResources().getColor(R.color.colorAccent))
+                .sizeDp(24);
+         imgUno.setImageDrawable(drawable);
 
         imgDos.setImageDrawable(new IconicsDrawable(this)
                 .icon(FontAwesome.Icon.faw_dashboard)

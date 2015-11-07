@@ -45,21 +45,22 @@ public class ActivityUniversalImage extends AppCompatActivity {
 
         imgImagen=(ImageView)findViewById(R.id.imgImagen);
 
+        //Caracteristias de la configuracion
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.context)
-                .memoryCacheExtraOptions(480, 800) // screen dimensions
+                .memoryCacheExtraOptions(480, 800) // dimensiones de pantalla
                 .diskCacheExtraOptions(480, 800, null)
                 .threadPoolSize(3) // default
                 .threadPriority(Thread.NORM_PRIORITY - 2) // default
                 .tasksProcessingOrder(QueueProcessingType.FIFO) // default
                 .memoryCacheSizePercentage(13) // default
-                .diskCacheSize(50 * 1024 * 1024) // 50MB
+                .diskCacheSize(50 * 1024 * 1024) // Tamano de cache 50MB
                 .diskCacheFileCount(100)
                 .imageDownloader(new BaseImageDownloader(this.context)) // default
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
                 .writeDebugLogs()
                 .build();
 
-
+        //Opciones al mostrar la imagen
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_no_disponible) // Imagen mientras carga
                 .showImageForEmptyUri(R.drawable.img_no_disponible) // No se encontro la imagen
@@ -75,6 +76,7 @@ public class ActivityUniversalImage extends AppCompatActivity {
                 .handler(new Handler()) // Nuevo hilo
                 .build();
 
+        //Mostrar la imagen
         ImageLoader img=ImageLoader.getInstance();
         img.init(config);
         img.displayImage(URL, imgImagen, options, new ImageLoadingListener() {
@@ -95,6 +97,7 @@ public class ActivityUniversalImage extends AppCompatActivity {
                     view.setVisibility(View.VISIBLE);
             }
         });
+    //Se utiliza la variable controlAcceso para evitar NullPointerException cuando salimos de la app mientras carga la imagen
 
     }
 

@@ -25,7 +25,7 @@ public class ListaAdapter extends BaseAdapter{
     private List<Persona> items;
     Callback callback;
 
-
+    //Constructor del adapter, definimos callback para acciones de Editar y Eliminar
     public ListaAdapter(Context context, List<Persona> items,Callback callback) {
         this.context = context;
         this.items = items;
@@ -49,6 +49,7 @@ public class ListaAdapter extends BaseAdapter{
     }
 
     static class ViewHolder{
+        //Campos de mi item_layout
         TextView txtEdad;
         TextView txtNombre;
         ImageView imgEditar;
@@ -61,6 +62,7 @@ public class ListaAdapter extends BaseAdapter{
         ViewHolder holder;
         if(convertView==null)
         {
+            //Inicializamos cada fila
             holder=new ViewHolder();
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.layout_orm, null);
@@ -76,6 +78,7 @@ public class ListaAdapter extends BaseAdapter{
             holder=(ViewHolder)convertView.getTag();
         }
 
+        //Llenamos los datos de cada item_layout con el objeto persona correspondiente
         final Persona item=items.get(position);
         holder.txtNombre.setText(item.getNombre()+" "+item.getApellido());
         holder.txtEdad.setText(String.valueOf(item.getEdad()));
@@ -90,13 +93,13 @@ public class ListaAdapter extends BaseAdapter{
                 .color(context.getResources().getColor(R.color.colorAccent))
                 .sizeDp(24));
 
+        //Definimos los callback para los botones Editar y Eliminar
         holder.imgEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callback.editar(item);
             }
         });
-
         holder.imgEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +110,7 @@ public class ListaAdapter extends BaseAdapter{
         return convertView;
     }
 
+    //Creamos la interface callback y los metodos de implementacion
     public interface Callback{
         public void eliminar(Persona persona);
         public void editar(Persona persona);

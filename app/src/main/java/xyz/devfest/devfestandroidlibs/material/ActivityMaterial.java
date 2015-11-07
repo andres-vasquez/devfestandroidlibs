@@ -26,11 +26,13 @@ import xyz.devfest.devfestandroidlibs.R;
 
 public class ActivityMaterial extends AppCompatActivity {
 
+    //IDs de los items de navegacion
     private static final int DRAWER_ITEM_UNO = 1;
     private static final int DRAWER_ITEM_DOS = 2;
     private static final int DRAWER_ITEM_TRES = 3;
     private static final int DRAWER_ITEM_CUATRO = 4;
 
+    //Definimos el entorno
     private Drawer drawer;
     private Context context;
     private FrameLayout contenedor;
@@ -43,6 +45,7 @@ public class ActivityMaterial extends AppCompatActivity {
         setContentView(R.layout.activity_activity_material);
         context=this;
 
+        //Antes de comenzar
         //Adicionar el tema  android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar el manifest
 
         // Handle Toolbar
@@ -51,7 +54,10 @@ public class ActivityMaterial extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        //Contenedor es el espacio central
         contenedor=(FrameLayout)findViewById(R.id.contenedor);
+
+        //Definimos el header
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -62,11 +68,13 @@ public class ActivityMaterial extends AppCompatActivity {
                 )
                 .build();
 
+        //Definimos el Navigacion Drawer
         drawer = new DrawerBuilder(this)
                 .withToolbar(toolbar)
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         new DividerDrawerItem(),
+                        //Deinimos los items de navegacion
                         new PrimaryDrawerItem().
                                 withIdentifier(DRAWER_ITEM_UNO).
                                 withName(R.string.item_uno).
@@ -92,6 +100,7 @@ public class ActivityMaterial extends AppCompatActivity {
                                 withSelectedIconColor(getResources().getColor(R.color.colorAccent)).
                                 withIcon(FontAwesome.Icon.faw_calendar)
                 ).addStickyDrawerItems(
+                        //Este item se encuentra en la parte inferior
                         new SecondaryDrawerItem()
                                 .withName(R.string.item_cuatro)
                                 .withIdentifier(DRAWER_ITEM_CUATRO)
@@ -102,6 +111,7 @@ public class ActivityMaterial extends AppCompatActivity {
                                 .withSelectedIconColor(getResources().getColor(R.color.colorAccent))
                                 .withCheckable(false)
                 )
+                //Accion Click sobre los items de menu
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
                 {
                     @Override
@@ -114,9 +124,11 @@ public class ActivityMaterial extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
+        //Al inicializar se selecciona el primer item
         seleccionartItem(DRAWER_ITEM_UNO);
     }
 
+    //Funcion de seleccion de item
     private void seleccionartItem(int i)
     {
         Toast.makeText(context,"Selecciono el item N "+i,Toast.LENGTH_LONG).show();
@@ -124,6 +136,7 @@ public class ActivityMaterial extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        //Guardamos la info del drawer
         if (drawer != null) {
             outState = drawer.saveInstanceState(outState);
         }
@@ -139,6 +152,7 @@ public class ActivityMaterial extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //Boton hamburguesa en el ActionBar para Abrir y Cerrar el Navigation Drawer
         if(item.getItemId()==android.R.id.home) {
             if (drawer.isDrawerOpen())
                 drawer.closeDrawer();
